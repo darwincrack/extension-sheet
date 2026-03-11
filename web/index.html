@@ -17,6 +17,19 @@
     </header>
 
     <main>
+      <section id="installSection" class="card install-card">
+        <h2>Para usar «Compartir» hay que instalar la app</h2>
+        <p class="hint">La opción de guardar en Sheets solo sale en <strong>Compartir</strong> después de añadir esta página a la pantalla de inicio.</p>
+        <ol class="install-steps">
+          <li>En Chrome, toca el menú <strong>⋮</strong> (tres puntos, arriba a la derecha).</li>
+          <li>Elige <strong>«Añadir a la pantalla de inicio»</strong> o <strong>«Instalar aplicación»</strong>.</li>
+          <li>Confirma. Se creará un icono en la pantalla de inicio.</li>
+          <li>Cuando quieras guardar un enlace, abre esa página, toca <strong>Compartir</strong> y elige <strong>«Guardar en Sheets»</strong> (o «Sheets»).</li>
+        </ol>
+        <button type="button" id="installBtn" class="install-btn" style="display: none;">Instalar aplicación</button>
+        <p id="installUnsupported" class="hint install-hint"></p>
+      </section>
+
       <section id="configSection" class="card">
         <h2>Configuración</h2>
         <p class="hint">Usa la misma URL del Web App que configuraste en la extensión de Chrome/Edge.</p>

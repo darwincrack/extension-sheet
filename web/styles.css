@@ -151,3 +151,29 @@ button:disabled {
 .footer strong {
   color: #202124;
 }
+
+.install-card {
+  border-left: 4px solid #1a73e8;
+}
+
+.install-steps {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.install-steps li {
+  margin-bottom: 8px;
+}
+
+.install-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+}
+
+.install-hint {
+  margin-top: 12px;
+  margin-bottom: 0;
+}

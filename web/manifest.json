@@ -5,6 +5,20 @@
   "start_url": "./index.html",
   "display": "standalone",
   "scope": "./",
+  "icons": [
+    {
+      "src": "./icon-192.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
   "share_target": {
     "action": "./index.html",
     "method": "GET",

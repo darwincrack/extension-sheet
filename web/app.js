@@ -15,6 +15,43 @@
   const manualUrlInput = document.getElementById('manualUrl');
   const manualTitleInput = document.getElementById('manualTitle');
   const manualSaveBtn = document.getElementById('manualSaveBtn');
+  const installBtn = document.getElementById('installBtn');
+  const installUnsupported = document.getElementById('installUnsupported');
+
+  // Si ya está instalada (standalone)
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true ||
+    document.referrer.includes('android-app://');
+  if (isStandalone && installUnsupported) {
+    installUnsupported.textContent = 'Ya está instalada. En cualquier página toca Compartir y elige «Guardar en Sheets» o «Sheets».';
+    installUnsupported.style.display = 'block';
+  }
+
+  // Botón nativo de instalación (Chrome Android)
+  var installPrompt = null;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    installPrompt = e;
+    if (installBtn) installBtn.style.display = 'block';
+    if (installUnsupported) installUnsupported.style.display = 'none';
+  });
+  if (installBtn) {
+    installBtn.addEventListener('click', function () {
+      if (!installPrompt) return;
+      installPrompt.prompt();
+      installPrompt.userChoice.then(function (choice) {
+        installPrompt = null;
+        installBtn.style.display = 'none';
+      });
+    });
+  }
+  if (installUnsupported && !isStandalone && installBtn && installBtn.style.display !== 'block') {
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      installUnsupported.textContent = 'En Safari: toca el botón Compartir (cuadrado con flecha) y elige «Añadir a la pantalla de inicio».';
+    }
+    installUnsupported.style.display = 'block';
+  }
 
   function getScriptUrl() {
     return (localStorage.getItem(SCRIPT_URL_KEY) || '').trim();
