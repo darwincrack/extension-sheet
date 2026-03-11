@@ -75,7 +75,7 @@
     resultSection.hidden = true;
   }
 
-  function sendToSheet(url, title, onDone) {
+  function sendToSheet(url, title, onDone, options) {
     var scriptUrl = getScriptUrl();
     if (!scriptUrl) {
       onDone('Configura la URL del Web App arriba.', true);
@@ -88,6 +88,24 @@
       '&title=' + encodeURIComponent(title || '') +
       '&date=' + encodeURIComponent(date) +
       '&returnUrl=' + encodeURIComponent(returnUrl);
+
+    var closeAfter = options && options.closeAfter;
+    if (closeAfter) {
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('style', 'position:absolute;width:0;height:0;border:0;visibility:hidden');
+      iframe.src = target;
+      document.body.appendChild(iframe);
+      if (resultMessage) {
+        resultMessage.textContent = 'Guardado. Cerrando…';
+        resultMessage.className = 'result-msg';
+      }
+      setTimeout(function () {
+        try {
+          window.close();
+        } catch (e) {}
+      }, 2000);
+      return;
+    }
     window.location.href = target;
   }
 
@@ -177,6 +195,6 @@
       if (!isError) {
         try { history.replaceState({}, document.title, window.location.pathname); } catch (e) {}
       }
-    });
+    }, { closeAfter: true });
   }
 })();
