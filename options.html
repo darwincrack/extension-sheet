@@ -26,25 +26,46 @@
           Borra el código que aparece por defecto en el editor de Apps Script y pega el siguiente código (selecciónalo todo y cópialo, o usa el botón «Copiar código»). Guarda el proyecto (Ctrl+S o el icono de disco).
           <div class="codigo-bloque">
             <button type="button" id="copyCodeBtn" class="copy-btn">Copiar código</button>
-            <pre><code id="scriptCode">function doPost(e) {
+            <pre><code id="scriptCode">function appendRowFromData(url, title, date) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([url || '', title || '', date || new Date().toISOString()]);
+}
+
+function doPost(e) {
   try {
     var body = e.postData &amp;&amp; e.postData.contents ? e.postData.contents : '{}';
     var data = JSON.parse(body);
-    var url = data.url || '';
-    var title = data.title || '';
-    var date = data.date || new Date().toISOString();
-
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    sheet.appendRow([url, title, date]);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    appendRowFromData(data.url || '', data.title || '', data.date || new Date().toISOString());
+    return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: false, error: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: err.toString() })).setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+function doGet(e) {
+  var params = e.parameter || {};
+  var url = params.url || '';
+  var title = params.title || '';
+  var date = params.date || new Date().toISOString();
+  var returnUrl = params.returnUrl || '';
+  var errorMsg = '';
+  try {
+    appendRowFromData(url, title, date);
+  } catch (err) {
+    errorMsg = err.toString();
+  }
+  var html = '&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;';
+  html += '&lt;style&gt;body{font-family:sans-serif;padding:2rem;text-align:center;} a{color:#1a73e8;} .err{color:#c5221f;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;';
+  if (errorMsg) {
+    html += '&lt;p class="err"&gt;Error: ' + errorMsg.replace(/&lt;/g, '&amp;lt;') + '&lt;/p&gt;';
+  } else {
+    html += '&lt;p&gt;&lt;strong&gt;Guardado en tu hoja&lt;/strong&gt;&lt;/p&gt;';
+  }
+  if (returnUrl) {
+    html += '&lt;p&gt;&lt;a href="' + returnUrl.replace(/"/g, '&quot;') + '"&gt;Volver a la app&lt;/a&gt;&lt;/p&gt;';
+  }
+  html += '&lt;/body&gt;&lt;/html&gt;';
+  return HtmlService.createHtmlOutput(html);
 }</code></pre>
           </div>
         </li>

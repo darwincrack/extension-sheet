@@ -82,27 +82,13 @@
       return;
     }
     var date = new Date().toISOString();
-    var payload = JSON.stringify({ url: url, title: title || '', date: date });
-
-    fetch(scriptUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: payload
-    })
-      .then(function (res) {
-        if (!res.ok) return res.text().then(function (t) { throw new Error(t || 'Error ' + res.status); });
-        return res.json();
-      })
-      .then(function (data) {
-        if (data && data.ok) {
-          onDone('Guardado en tu hoja correctamente.', false);
-        } else {
-          onDone((data && data.error) || 'Error desconocido', true);
-        }
-      })
-      .catch(function (err) {
-        onDone(err.message || 'Error de red. Comprueba la URL.', true);
-      });
+    var base = scriptUrl.split('?')[0];
+    var returnUrl = window.location.origin + window.location.pathname;
+    var target = base + '?url=' + encodeURIComponent(url) +
+      '&title=' + encodeURIComponent(title || '') +
+      '&date=' + encodeURIComponent(date) +
+      '&returnUrl=' + encodeURIComponent(returnUrl);
+    window.location.href = target;
   }
 
   // Cargar URL guardada
