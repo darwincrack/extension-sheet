@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="app">
-    <header class="header">
+    <header class="header" id="mainHeader">
       <h1>Guardar en Sheets</h1>
       <p class="subtitle">Desde el móvil: Compartir → esta app</p>
     </header>
@@ -41,9 +41,11 @@
 
       <section id="resultSection" class="card result-card" hidden>
         <p id="resultMessage" class="result-msg"></p>
+        <p id="resultSubtext" class="result-subtext" style="display: none;"></p>
+        <a href="./index.html" id="openConfigLink" class="config-link" style="display: none;">Abrir configuración</a>
       </section>
 
-      <section class="card">
+      <section id="manualSection" class="card">
         <h2>Guardar enlace a mano</h2>
         <p class="hint">Pega aquí un enlace y opcionalmente un título para guardarlo en tu hoja.</p>
         <label for="manualUrl">URL</label>
@@ -54,7 +56,7 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="mainFooter">
       <p>Misma hoja que la extensión de escritorio. Configura la URL una vez y usa <strong>Compartir</strong> en cualquier página para guardarla.</p>
     </footer>
   </div>

@@ -157,13 +157,37 @@
     sharedUrl = params.text;
   }
 
+  var isShareMode = !!sharedUrl;
+  var mainHeader = document.getElementById('mainHeader');
+  var manualSection = document.getElementById('manualSection');
+  var mainFooter = document.getElementById('mainFooter');
+  var resultSubtext = document.getElementById('resultSubtext');
+  var openConfigLink = document.getElementById('openConfigLink');
+
+  function setShareOnlyView(show) {
+    if (mainHeader) mainHeader.style.display = show ? 'none' : '';
+    if (document.getElementById('installSection')) document.getElementById('installSection').style.display = show ? 'none' : '';
+    if (document.getElementById('configSection')) document.getElementById('configSection').style.display = show ? 'none' : '';
+    if (manualSection) manualSection.style.display = show ? 'none' : '';
+    if (mainFooter) mainFooter.style.display = show ? 'none' : '';
+    document.body.classList.toggle('share-result-view', show);
+  }
+
   if (sharedUrl) {
+    setShareOnlyView(true);
     resultSection.hidden = false;
     resultMessage.textContent = 'Guardando…';
     resultMessage.className = 'result-msg';
+    if (resultSubtext) resultSubtext.style.display = 'none';
+    if (openConfigLink) openConfigLink.style.display = 'none';
 
     sendToSheet(sharedUrl, sharedTitle, function (msg, isError) {
       showResult(msg, isError);
+      if (resultSubtext) resultSubtext.style.display = 'none';
+      if (openConfigLink) {
+        openConfigLink.style.display = 'block';
+        openConfigLink.href = './index.html';
+      }
       if (!isError) {
         try { history.replaceState({}, document.title, window.location.pathname); } catch (e) {}
       }

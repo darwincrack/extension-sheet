@@ -177,3 +177,34 @@ button:disabled {
   margin-top: 12px;
   margin-bottom: 0;
 }
+
+/* Vista solo resultado (abierto desde Compartir) */
+body.share-result-view .app {
+  justify-content: center;
+  min-height: 100vh;
+}
+
+body.share-result-view .result-card {
+  flex: 0 1 auto;
+  text-align: center;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.result-subtext {
+  margin: 8px 0 0 0;
+  font-size: 0.9rem;
+  color: #5f6368;
+}
+
+.config-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.config-link:hover {
+  text-decoration: underline;
+}
