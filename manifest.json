@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Guardar pestaña en Sheets",
+  "version": "1.0.0",
+  "description": "Guarda la URL y título de la pestaña actual en una hoja de Google Sheets",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://script.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html"
+  }
+}

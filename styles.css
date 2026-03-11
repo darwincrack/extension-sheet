@@ -1,0 +1,224 @@
+.popup {
+  width: 280px;
+  padding: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+}
+
+.popup button {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+}
+
+.popup button:hover:not(:disabled) {
+  background: #1557b0;
+}
+
+.popup button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.popup .message {
+  min-height: 1.2em;
+  margin: 8px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.popup .message.error {
+  color: #c5221f;
+}
+
+.popup a {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.popup a:hover {
+  text-decoration: underline;
+}
+
+/* Options page */
+.options {
+  max-width: 520px;
+  padding: 24px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.options h1 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.options label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.options input[type="url"] {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #dadce0;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.options input[type="url"]:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+.options button {
+  margin-top: 16px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+}
+
+.options button:hover {
+  background: #1557b0;
+}
+
+.options .hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.options .saved {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #137333;
+}
+
+/* Instructivo en opciones */
+.options .instructivo {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #dadce0;
+}
+
+.options .instructivo h2 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.options .instructivo > p {
+  margin: 0 0 14px 0;
+  font-size: 14px;
+  color: #5f6368;
+}
+
+.options .pasos {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #202124;
+}
+
+.options .pasos li {
+  margin-bottom: 14px;
+}
+
+.options .pasos li:last-child {
+  margin-bottom: 0;
+}
+
+.options .pasos strong {
+  font-weight: 600;
+}
+
+.options .subpasos {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+  list-style-type: lower-alpha;
+}
+
+.options .subpasos li {
+  margin-bottom: 6px;
+}
+
+.options .instructivo ul {
+  margin: 6px 0 0 0;
+  padding-left: 18px;
+}
+
+.options .instructivo code {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: #f1f3f4;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+
+.options .instructivo a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.options .instructivo a:hover {
+  text-decoration: underline;
+}
+
+/* Bloque de código para copiar */
+.options .codigo-bloque {
+  position: relative;
+  margin-top: 12px;
+  background: #f8f9fa;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.options .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+.options .copy-btn:hover {
+  background: #1557b0;
+}
+
+.options .codigo-bloque pre {
+  margin: 0;
+  padding: 40px 14px 14px 14px;
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-x: auto;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+}
+
+.options .codigo-bloque code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opciones - Guardar en Sheets</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="options">
+    <h1>Configurar Google Sheets</h1>
+    <label for="scriptUrl">URL del Web App (Apps Script)</label>
+    <input type="url" id="scriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+    <button id="saveOptions" type="button">Guardar</button>
+    <p id="savedMsg" class="saved" style="display: none;">URL guardada correctamente.</p>
+
+    <section class="instructivo" aria-label="Instrucciones de configuración">
+      <h2>Cómo obtener la URL del Web App</h2>
+      <p>Sigue estos pasos para crear la hoja y el script que recibirán las pestañas guardadas:</p>
+      <ol class="pasos">
+        <li><strong>Crear la hoja</strong><br>
+          Crea o abre una hoja en <a href="https://sheets.google.com" target="_blank" rel="noopener">Google Sheets</a>. Opcional: en la primera fila puedes poner los encabezados <em>URL</em>, <em>Título</em> y <em>Fecha</em>.</li>
+        <li><strong>Abrir Apps Script</strong><br>
+          En esa hoja, ve al menú <strong>Extensiones</strong> → <strong>Apps Script</strong>. Se abrirá el editor del script.</li>
+        <li><strong>Pegar el código</strong><br>
+          Borra el código que aparece por defecto en el editor de Apps Script y pega el siguiente código (selecciónalo todo y cópialo, o usa el botón «Copiar código»). Guarda el proyecto (Ctrl+S o el icono de disco).
+          <div class="codigo-bloque">
+            <button type="button" id="copyCodeBtn" class="copy-btn">Copiar código</button>
+            <pre><code id="scriptCode">function doPost(e) {
+  try {
+    var body = e.postData &amp;&amp; e.postData.contents ? e.postData.contents : '{}';
+    var data = JSON.parse(body);
+    var url = data.url || '';
+    var title = data.title || '';
+    var date = data.date || new Date().toISOString();
+
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    sheet.appendRow([url, title, date]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}</code></pre>
+          </div>
+        </li>
+        <li><strong>Desplegar como aplicación web</strong><br>
+          <ol class="subpasos">
+            <li>Haz clic en el botón azul <strong>«Implementar»</strong> (arriba a la derecha).</li>
+            <li>En el menú, elige <strong>«Nueva implementación»</strong> (o «New deployment» si está en inglés).</li>
+            <li>Donde dice <strong>«Seleccionar tipo»</strong> (o «Select type»), haz clic y elige <strong>«Aplicación web»</strong> («Web app»).</li>
+            <li>En la ventana de configuración:
+              <ul>
+                <li><strong>Descripción:</strong> Puedes dejar «Nueva implementación» o poner algo como «Guardar pestañas».</li>
+                <li><strong>Ejecutar como:</strong> <strong>Yo</strong> (tu cuenta).</li>
+                <li><strong>Quién tiene acceso:</strong> <strong>Cualquier persona</strong> (o «Anyone» en inglés).</li>
+              </ul>
+            </li>
+            <li>Pulsa <strong>«Implementar»</strong> (o «Deploy»).</li>
+          </ol>
+        </li>
+        <li><strong>Autorizar la aplicación</strong> (solo la primera vez)<br>
+          <ol class="subpasos">
+            <li>Haz clic en <strong>«Autorizar acceso»</strong>.</li>
+            <li>Elige tu cuenta de Google.</li>
+            <li>Si aparece «Google no ha verificado esta app», haz clic en <strong>«Avanzado»</strong> y luego en <strong>«Ir a [nombre del proyecto] (no seguro)»</strong>.</li>
+            <li>Acepta los permisos que pida.</li>
+          </ol>
+        </li>
+        <li><strong>Copiar la URL</strong><br>
+          Al terminar se mostrará la <strong>URL de la aplicación web</strong> (algo como <code>https://script.google.com/macros/s/XXXXX/exec</code>). Cópiala con el botón «Copiar» o seleccionándola, y pégala en el campo de arriba. Luego pulsa <strong>«Guardar»</strong>.</li>
+      </ol>
+    </section>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

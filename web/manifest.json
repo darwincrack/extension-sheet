@@ -1,0 +1,17 @@
+{
+  "name": "Guardar en Sheets",
+  "short_name": "Sheets",
+  "description": "Guarda enlaces en tu hoja de Google Sheets desde el móvil",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "scope": "./",
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "url": "url",
+      "title": "title",
+      "text": "text"
+    }
+  }
+}

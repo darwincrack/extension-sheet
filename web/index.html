@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a73e8">
+  <meta name="description" content="Guarda enlaces en tu hoja de Google Sheets desde el móvil usando Compartir">
+  <title>Guardar en Sheets</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Guardar en Sheets</h1>
+      <p class="subtitle">Desde el móvil: Compartir → esta app</p>
+    </header>
+
+    <main>
+      <section id="configSection" class="card">
+        <h2>Configuración</h2>
+        <p class="hint">Usa la misma URL del Web App que configuraste en la extensión de Chrome/Edge.</p>
+        <label for="scriptUrl">URL del Web App (Apps Script)</label>
+        <input type="url" id="scriptUrl" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
+        <button type="button" id="saveConfigBtn">Guardar URL</button>
+        <p id="configSaved" class="saved-msg" aria-live="polite"></p>
+      </section>
+
+      <section id="resultSection" class="card result-card" hidden>
+        <p id="resultMessage" class="result-msg"></p>
+      </section>
+
+      <section class="card">
+        <h2>Guardar enlace a mano</h2>
+        <p class="hint">Pega aquí un enlace y opcionalmente un título para guardarlo en tu hoja.</p>
+        <label for="manualUrl">URL</label>
+        <input type="url" id="manualUrl" placeholder="https://..." autocomplete="off">
+        <label for="manualTitle">Título (opcional)</label>
+        <input type="text" id="manualTitle" placeholder="Título del enlace" autocomplete="off">
+        <button type="button" id="manualSaveBtn">Guardar en hoja</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Misma hoja que la extensión de escritorio. Configura la URL una vez y usa <strong>Compartir</strong> en cualquier página para guardarla.</p>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
